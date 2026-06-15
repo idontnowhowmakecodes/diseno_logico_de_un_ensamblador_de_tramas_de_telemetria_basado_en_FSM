@@ -1,6 +1,3 @@
-# Script Tcl/Do para Siemens EDA ModelSim
-# Proyecto: Ensamblador de Tramas (FSM TMR)
-# Objetivo: Compilacion y Ejecucion de Pruebas de Cobertura Funcional
 
 # 1. Eliminar la libreria de trabajo actual si existe, y crear una limpia
 if {[file exists work]} {
