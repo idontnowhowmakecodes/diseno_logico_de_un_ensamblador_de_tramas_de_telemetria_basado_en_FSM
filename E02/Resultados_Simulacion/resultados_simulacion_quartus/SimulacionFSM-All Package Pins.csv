@@ -1,0 +1,164 @@
+Copyright (C) 2025  Altera Corporation. All rights reserved.
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, the Altera Quartus Prime License Agreement,
+the Altera IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Altera and sold by Altera or its authorized distributors.  Please
+refer to the Altera Software License Subscription Agreements 
+on the Quartus Prime software download page.
+
+All Package Pins
+
+Location,Pad Number,I/O Bank,Pin Name/Usage,Dir.,I/O Standard,Voltage,I/O Type,User Assignment,Bus Hold,Weak Pull Up
+1,0,1,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+2,1,1,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+3,2,1,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+4,,,GND,gnd,,,--,,--,--
+5,,,VCCINT,power,,1.2V,--,,--,--
+6,5,1,~ALTERA_ASDO_DATA1~ / RESERVED_INPUT_WITH_WEAK_PULLUP,input,2.5 V,,Row I/O,N,no,On
+7,6,1,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,--,--
+8,7,1,~ALTERA_FLASH_nCE_nCSO~ / RESERVED_INPUT_WITH_WEAK_PULLUP,input,2.5 V,,Row I/O,N,no,On
+9,9,1,^nSTATUS,,,,--,,--,--
+10,13,1,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+11,14,1,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+12,15,1,~ALTERA_DCLK~,output,2.5 V,,Row I/O,N,no,On
+13,16,1,~ALTERA_DATA0~ / RESERVED_INPUT_WITH_WEAK_PULLUP,input,2.5 V,,Row I/O,N,no,On
+14,17,1,^nCONFIG,,,,--,,--,--
+15,18,1,altera_reserved_tdi,input,2.5 V,,--,N,no,Off
+16,19,1,altera_reserved_tck,input,2.5 V,,--,N,no,Off
+17,,1,VCCIO1,power,,2.5V,--,,--,--
+18,20,1,altera_reserved_tms,input,2.5 V,,--,N,no,Off
+19,,,GND,gnd,,,--,,--,--
+20,21,1,altera_reserved_tdo,output,2.5 V,,--,N,no,Off
+21,22,1,^nCE,,,,--,,--,--
+22,,,GND,gnd,,,--,,--,--
+23,24,1,clk_50M,input,2.5 V,,Row I/O,N,no,Off
+24,25,2,rst_n,input,2.5 V,,Row I/O,N,no,Off
+25,26,2,GND+,,,,Row I/O,,--,--
+26,,2,VCCIO2,power,,2.5V,--,,--,--
+27,,,GND,gnd,,,--,,--,--
+28,31,2,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+29,,,VCCINT,power,,1.2V,--,,--,--
+30,34,2,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+31,36,2,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,--,--
+32,39,2,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+33,40,2,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+34,41,2,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+35,,--,VCCA1,power,,2.5V,--,,--,--
+36,,,GNDA1,gnd,,,--,,--,--
+37,,,VCCD_PLL1,power,,1.2V,--,,--,--
+38,45,3,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+39,46,3,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+40,,3,VCCIO3,power,,2.5V,--,,--,--
+41,,,GND,gnd,,,--,,--,--
+42,52,3,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+43,53,3,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+44,54,3,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+45,,,VCCINT,power,,1.2V,--,,--,--
+46,58,3,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,--,--
+47,,3,VCCIO3,power,,2.5V,--,,--,--
+48,,,GND,gnd,,,--,,--,--
+49,68,3,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+50,69,3,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+51,70,3,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+52,72,3,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+53,73,3,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+54,74,4,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+55,75,4,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+56,,4,VCCIO4,power,,2.5V,--,,--,--
+57,,,GND,gnd,,,--,,--,--
+58,80,4,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+59,83,4,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+60,84,4,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+61,,,VCCINT,power,,1.2V,--,,--,--
+62,,4,VCCIO4,power,,2.5V,--,,--,--
+63,,,GND,gnd,,,--,,--,--
+64,89,4,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+65,90,4,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,--,--
+66,93,4,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+67,94,4,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+68,96,4,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+69,97,4,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+70,98,4,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+71,99,4,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+72,100,4,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+73,102,5,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+74,103,5,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+75,104,5,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+76,106,5,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+77,107,5,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+78,,,VCCINT,power,,1.2V,--,,--,--
+79,,,GND,gnd,,,--,,--,--
+80,113,5,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,--,--
+81,,5,VCCIO5,power,,2.5V,--,,--,--
+82,,,GND,gnd,,,--,,--,--
+83,117,5,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+84,118,5,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+85,119,5,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+86,120,5,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+87,121,5,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+88,125,5,GND+,,,,Row I/O,,--,--
+89,126,5,GND+,,,,Row I/O,,--,--
+90,127,6,GND+,,,,Row I/O,,--,--
+91,128,6,GND+,,,,Row I/O,,--,--
+92,129,6,^CONF_DONE,,,,--,,--,--
+93,,6,VCCIO6,power,,2.5V,--,,--,--
+94,130,6,^MSEL0,,,,--,,--,--
+95,,,GND,gnd,,,--,,--,--
+96,131,6,^MSEL1,,,,--,,--,--
+97,132,6,^MSEL2,,,,--,,--,--
+97,133,6,^MSEL3,,,,--,,--,--
+98,136,6,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+99,137,6,i2c_scl,output,2.5 V,,Row I/O,N,no,Off
+100,138,6,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+101,139,6,~ALTERA_nCEO~ / RESERVED_OUTPUT_OPEN_DRAIN,output,2.5 V,,Row I/O,N,no,Off
+102,,,VCCINT,power,,1.2V,--,,--,--
+103,140,6,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+104,141,6,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+105,142,6,i2c_sda,bidir,2.5 V,,Row I/O,N,no,Off
+106,146,6,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Row I/O,,no,On
+107,,--,VCCA2,power,,2.5V,--,,--,--
+108,,,GNDA2,gnd,,,--,,--,--
+109,,,VCCD_PLL2,power,,1.2V,--,,--,--
+110,152,7,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+111,154,7,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+112,155,7,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+113,156,7,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+114,157,7,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+115,158,7,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+116,,,VCCINT,power,,1.2V,--,,--,--
+117,,7,VCCIO7,power,,2.5V,--,,--,--
+118,,,GND,gnd,,,--,,--,--
+119,163,7,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,--,--
+120,164,7,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+121,165,7,uart_tx,output,2.5 V,,Column I/O,N,no,Off
+122,,7,VCCIO7,power,,2.5V,--,,--,--
+123,,,GND,gnd,,,--,,--,--
+124,173,7,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+125,174,7,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+126,175,7,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+127,176,7,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+128,177,8,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+129,178,8,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+130,,8,VCCIO8,power,,2.5V,--,,--,--
+131,,,GND,gnd,,,--,,--,--
+132,181,8,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+133,182,8,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+134,,,VCCINT,power,,1.2V,--,,--,--
+135,185,8,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+136,187,8,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,--,--
+137,190,8,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+138,191,8,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+139,,8,VCCIO8,power,,2.5V,--,,--,--
+140,,,GND,gnd,,,--,,--,--
+141,195,8,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+142,201,8,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+143,202,8,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+144,203,8,RESERVED_INPUT_WITH_WEAK_PULLUP,,,,Column I/O,,no,On
+EPAD,,,GND,,,,--,,--,--

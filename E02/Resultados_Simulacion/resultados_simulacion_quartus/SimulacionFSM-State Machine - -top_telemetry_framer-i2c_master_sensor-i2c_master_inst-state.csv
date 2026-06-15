@@ -1,0 +1,39 @@
+Copyright (C) 2025  Altera Corporation. All rights reserved.
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, the Altera Quartus Prime License Agreement,
+the Altera IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Altera and sold by Altera or its authorized distributors.  Please
+refer to the Altera Software License Subscription Agreements 
+on the Quartus Prime software download page.
+
+State Machine - |top_telemetry_framer|i2c_master_sensor:i2c_master_inst|state
+
+Name,state.DONE,state.STOP2,state.STOP1,state.NACK,state.RX_BYTE_3,state.ACK_5,state.RX_BYTE_2,state.ACK_4,state.RX_BYTE_1,state.ACK_3,state.TX_ADDR_R,state.REP_START3,state.REP_START2,state.REP_START1,state.ACK_2,state.TX_REG,state.ACK_1,state.TX_ADDR_W,state.START2,state.START1,state.IDLE
+state.IDLE,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+state.START1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1
+state.START2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1
+state.TX_ADDR_W,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1
+state.ACK_1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1
+state.TX_REG,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1
+state.ACK_2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1
+state.REP_START1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1
+state.REP_START2,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1
+state.REP_START3,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1
+state.TX_ADDR_R,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1
+state.ACK_3,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1
+state.RX_BYTE_1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1
+state.ACK_4,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1
+state.RX_BYTE_2,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+state.ACK_5,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+state.RX_BYTE_3,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+state.NACK,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+state.STOP1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+state.STOP2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+state.DONE,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1

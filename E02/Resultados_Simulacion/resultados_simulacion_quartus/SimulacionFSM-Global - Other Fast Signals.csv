@@ -1,0 +1,23 @@
+Copyright (C) 2025  Altera Corporation. All rights reserved.
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, the Altera Quartus Prime License Agreement,
+the Altera IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Altera and sold by Altera or its authorized distributors.  Please
+refer to the Altera Software License Subscription Agreements 
+on the Quartus Prime software download page.
+
+Global & Other Fast Signals
+
+Name,Location,Fan-Out,Fan-Out Using Intentional Clock Skew,Global Resource Used,Global Line Name,Enable Signal Source Name
+altera_internal_jtag~TCKUTAP,JTAG_X1_Y12_N0,276,0,Global Clock,GCLK4,--
+clk_50M,PIN_23,207,0,Global Clock,GCLK2,--
+clock_divider:clk_div_inst|clk_100k,FF_X33_Y10_N17,57,0,Global Clock,GCLK5,--
+clock_divider:clk_div_inst|clk_uart,FF_X4_Y7_N17,15,0,Global Clock,GCLK0,--
+rst_n,PIN_24,146,0,Global Clock,GCLK1,--
