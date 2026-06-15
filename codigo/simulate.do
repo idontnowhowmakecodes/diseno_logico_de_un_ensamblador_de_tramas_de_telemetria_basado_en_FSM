@@ -1,5 +1,3 @@
-# simulate.do
-# Script TCL para automatizar la simulacion en ModelSim
 
 # 1. Crear directorio de trabajo
 vlib work
