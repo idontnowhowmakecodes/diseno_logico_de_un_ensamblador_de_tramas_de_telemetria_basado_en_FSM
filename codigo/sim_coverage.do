@@ -5,73 +5,34 @@ if {[file exists work]} {
 }
 vlib work
 vmap work work
+vlog clock_divider.v memory_and_framer.v framer_fsm_tmr.v i2c_master_sensor.v uart_tx_module.v top_telemetry_framer.v tb_telemetry_framer.v
+vsim -voptargs="+acc" work.tb_telemetry_framer
 
-# 2. Compilar los archivos fuente RTL y el Testbench con flags de Cobertura
-# Explicacion de Flags +cover=
-# b: Branch (Ramificaciones/Arcos)
-# c: Condition (Condicionales booleanas)
-# e: Expression (Expresiones combinacionales)
-# f: FSM (Reconocimiento automatico de maquinas de estado y transiciones)
-# s: Statement (Lineas de codigo visitadas)
-echo "Compilando modulo de memoria..."
-vlog memory_and_framer.v
+# BANNER: Fase
+add wave -group "Fase de Prueba" -position insertpoint -color "Yellow" -radix unsigned sim:/tb_telemetry_framer/case_number
 
-echo "Compilando modulo de la Maquina de Estados (FSM TMR)..."
-vlog framer_fsm_tmr.v
+# Grupo 1: Reloj y Control
+add wave -group "Reloj y Control" -position insertpoint sim:/tb_telemetry_framer/clk_50M
+add wave -group "Reloj y Control" -position insertpoint sim:/tb_telemetry_framer/rst_n
+add wave -group "Reloj y Control" -position insertpoint -radix unsigned sim:/tb_telemetry_framer/dut/fsm_tmr_inst/voted_state
+add wave -group "Reloj y Control" -position insertpoint sim:/tb_telemetry_framer/dut/fsm_tmr_inst/data_ready_pulse
 
-echo "Compilando el Entorno de Testbench Dirigido..."
-vlog tb_fsm_coverage.v
+# Grupo 2: Buses I2C
+add wave -group "Buses I2C" -position insertpoint sim:/tb_telemetry_framer/i2c_scl
+add wave -group "Buses I2C" -position insertpoint sim:/tb_telemetry_framer/i2c_sda
+add wave -group "Buses I2C" -position insertpoint sim:/tb_telemetry_framer/dut/i2c_master_inst/data_ready
+add wave -group "Buses I2C" -position insertpoint -radix unsigned sim:/tb_telemetry_framer/dut/i2c_master_inst/state
 
-# 3. Lanzar el simulador habilitando el motor de cobertura de codigo
-# Nota: +acc garantiza que las senales esten visibles en los waveform
-echo "Invocando vsim sin motor de cobertura (licencia no disponible)..."
-vsim -voptargs="+acc" work.tb_fsm_coverage
+# Grupo 3: Transmision UART
+add wave -group "Transmision UART" -position insertpoint sim:/tb_telemetry_framer/uart_tx
+add wave -group "Transmision UART" -position insertpoint sim:/tb_telemetry_framer/dut/uart_tx_inst/tx_busy
+add wave -group "Transmision UART" -position insertpoint sim:/tb_telemetry_framer/dut/fsm_tmr_inst/load_tx
 
-# 4. Configuracion visual de la herramienta (Waveforms)
-view wave
+# Grupo 4: Recepcion Monitor
+add wave -group "Recepcion (Monitor)" -position insertpoint -radix hexadecimal sim:/tb_telemetry_framer/rx_byte
+add wave -group "Recepcion (Monitor)" -position insertpoint -radix unsigned sim:/tb_telemetry_framer/byte_idx
+add wave -group "Recepcion (Monitor)" -position insertpoint -radix hexadecimal sim:/tb_telemetry_framer/calc_chk
+add wave -group "Recepcion (Monitor)" -position insertpoint sim:/tb_telemetry_framer/trama_terminada
 
-# - Señales del Sistema
-add wave -noupdate -divider "Reloj y Reset"
-add wave -noupdate -color Gold /tb_fsm_coverage/clk_50M
-add wave -noupdate -color Red /tb_fsm_coverage/rst_n
-
-# - Estímulos inyectados (Inputs a la FSM)
-add wave -noupdate -divider "Estímulos (Inyeccion Manual)"
-add wave -noupdate -color Yellow /tb_fsm_coverage/data_ready_100k
-add wave -noupdate -radix hex /tb_fsm_coverage/payload_data
-add wave -noupdate -color Orange /tb_fsm_coverage/tx_busy
-
-# - Estados de la Maquina Tolerante a Fallos (TMR)
-add wave -noupdate -divider "Registros de Estado FSM (TMR)"
-add wave -noupdate -radix unsigned /tb_fsm_coverage/dut_fsm/state_A
-add wave -noupdate -radix unsigned /tb_fsm_coverage/dut_fsm/state_B
-add wave -noupdate -radix unsigned /tb_fsm_coverage/dut_fsm/state_C
-add wave -noupdate -color Cyan -radix unsigned /tb_fsm_coverage/dut_fsm/voted_state
-
-# - Salidas de Control
-add wave -noupdate -divider "Senales de Control Generadas"
-add wave -noupdate /tb_fsm_coverage/we_ram
-add wave -noupdate /tb_fsm_coverage/sel_rom
-add wave -noupdate /tb_fsm_coverage/load_tx
-add wave -noupdate -radix unsigned /tb_fsm_coverage/ptr
-add wave -noupdate /tb_fsm_coverage/update_checksum
-
-# - Transmision de Memoria (Datos Resultantes)
-add wave -noupdate -divider "Datos Segmentados (ROM/RAM/CHK)"
-add wave -noupdate -color Magenta -radix hex /tb_fsm_coverage/data_out
-add wave -noupdate -color Magenta -radix hex /tb_fsm_coverage/checksum
-
-# 5. Formatear la vista
-TreeUpdate [SetDefaultTree]
-WaveRestoreZoom {0 ns} {4000 ns}
-
-# 6. Ejecutar toda la bateria de pruebas hasta que $finish detenga la simulacion
-echo "Iniciando corrida temporal de vectores de prueba..."
 run -all
-
-# 7. (Reportes de cobertura omitidos por falta de licencia)
-
-echo "--------------------------------------------------------"
-echo ">> SIMULACION COMPLETADA EXITOSAMENTE <<"
-echo "Revise la consola y la ventana Waveforms para verificar que la FSM pase los 4 Casos."
-echo "--------------------------------------------------------"
+wave zoom full
