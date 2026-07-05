@@ -1,55 +1,34 @@
 
-# 1. Crear directorio de trabajo
 vlib work
-
-# 2. Compilar archivos del diseño
-# Ajustar el orden para que las dependencias estén correctas
-vlog clock_divider.v
-vlog i2c_master_sensor.v
-vlog framer_fsm_tmr.v
-vlog memory_and_framer.v
-vlog uart_tx_module.v
-vlog top_telemetry_framer.v
-vlog tb_telemetry_framer.v
-
-# 3. Cargar el modulo top de simulacion (-voptargs=+acc evita que ModelSim oculte señales)
+vmap work work
+vlog clock_divider.v memory_and_framer.v framer_fsm_tmr.v i2c_master_sensor.v uart_tx_module.v top_telemetry_framer.v tb_telemetry_framer.v
 vsim -voptargs="+acc" work.tb_telemetry_framer
 
-# 4. Configurar la ventana Wave
-onerror {resume}
-quietly WaveActivateNextPane {} 0
+# BANNER: Fase
+add wave -group "Fase de Prueba" -position insertpoint -color "Yellow" -radix unsigned sim:/tb_telemetry_framer/case_number
 
-add wave -noupdate -divider "=== Reloj y Control ==="
-add wave -noupdate -color Yellow /tb_telemetry_framer/clk_50M
-add wave -noupdate -color Orange /tb_telemetry_framer/rst_n
+# Grupo 1: Reloj y Control
+add wave -group "Reloj y Control" -position insertpoint sim:/tb_telemetry_framer/clk_50M
+add wave -group "Reloj y Control" -position insertpoint sim:/tb_telemetry_framer/rst_n
+add wave -group "Reloj y Control" -position insertpoint -radix unsigned sim:/tb_telemetry_framer/dut/fsm_tmr_inst/voted_state
+add wave -group "Reloj y Control" -position insertpoint sim:/tb_telemetry_framer/dut/fsm_tmr_inst/data_ready_pulse
 
-add wave -noupdate -divider "=== Bus I2C ==="
-add wave -noupdate -color Cyan /tb_telemetry_framer/i2c_scl
-add wave -noupdate -color Cyan /tb_telemetry_framer/i2c_sda
-add wave -noupdate -radix hexadecimal /tb_telemetry_framer/dut/i2c_inst/payload_data
-add wave -noupdate -color Magenta /tb_telemetry_framer/dut/data_ready_wire
+# Grupo 2: Buses I2C
+add wave -group "Buses I2C" -position insertpoint sim:/tb_telemetry_framer/i2c_scl
+add wave -group "Buses I2C" -position insertpoint sim:/tb_telemetry_framer/i2c_sda
+add wave -group "Buses I2C" -position insertpoint sim:/tb_telemetry_framer/dut/i2c_master_inst/data_ready
+add wave -group "Buses I2C" -position insertpoint -radix unsigned sim:/tb_telemetry_framer/dut/i2c_master_inst/state
 
-add wave -noupdate -divider "=== Transmision UART ==="
-add wave -noupdate -color Green /tb_telemetry_framer/uart_tx
-add wave -noupdate -radix hexadecimal /tb_telemetry_framer/dut/uart_inst/tx_data
-add wave -noupdate /tb_telemetry_framer/dut/uart_inst/tx_busy
+# Grupo 3: Transmision UART
+add wave -group "Transmision UART" -position insertpoint sim:/tb_telemetry_framer/uart_tx
+add wave -group "Transmision UART" -position insertpoint sim:/tb_telemetry_framer/dut/uart_tx_inst/tx_busy
+add wave -group "Transmision UART" -position insertpoint sim:/tb_telemetry_framer/dut/fsm_tmr_inst/load_tx
 
-add wave -noupdate -divider "=== Recepcion (Testbench) ==="
-add wave -noupdate -radix hexadecimal /tb_telemetry_framer/rx_byte
-add wave -noupdate -radix unsigned /tb_telemetry_framer/byte_idx
-add wave -noupdate -radix hexadecimal /tb_telemetry_framer/calc_chk
+# Grupo 4: Recepcion Monitor
+add wave -group "Recepcion (Monitor)" -position insertpoint -radix hexadecimal sim:/tb_telemetry_framer/rx_byte
+add wave -group "Recepcion (Monitor)" -position insertpoint -radix unsigned sim:/tb_telemetry_framer/byte_idx
+add wave -group "Recepcion (Monitor)" -position insertpoint -radix hexadecimal sim:/tb_telemetry_framer/calc_chk
+add wave -group "Recepcion (Monitor)" -position insertpoint sim:/tb_telemetry_framer/trama_terminada
 
-TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {0 ps} 0}
-configure wave -namecolwidth 250
-configure wave -valuecolwidth 100
-configure wave -justifyvalue left
-configure wave -signalnamewidth 1
-configure wave -snapdistance 10
-configure wave -datasetprefix 0
-configure wave -rowmargin 4
-configure wave -childrowmargin 2
-
-# 5. Ejecutar hasta encontrar el $finish
 run -all
 wave zoom full
