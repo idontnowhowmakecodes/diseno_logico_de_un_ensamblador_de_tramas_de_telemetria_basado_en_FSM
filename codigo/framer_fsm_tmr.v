@@ -9,7 +9,7 @@ module framer_fsm_tmr (
     output reg we_ram,
     output reg sel_rom,
     output reg load_tx,
-    output reg [3:0] ptr,
+    output reg [4:0] ptr,
     output reg clear_checksum,
     output reg update_checksum,
     output reg send_checksum
@@ -66,7 +66,7 @@ module framer_fsm_tmr (
     reg [3:0] state_C /* synthesis preserve */;
     
     reg [3:0] next_state;
-    reg [3:0] ptr_reg, next_ptr;
+    reg [4:0] ptr_reg, next_ptr;
 
     // Votador Mayoritario (Combinacional)
     wire [3:0] voted_state;
@@ -77,7 +77,7 @@ module framer_fsm_tmr (
             state_A <= IDLE;
             state_B <= IDLE;
             state_C <= IDLE;
-            ptr_reg <= 4'd0;
+            ptr_reg <= 5'd0;
         end else begin
             state_A <= next_state;
             state_B <= next_state;
@@ -101,14 +101,14 @@ module framer_fsm_tmr (
             IDLE: begin
                 clear_checksum = 1'b1;
                 if (data_ready_pulse) begin
-                    next_ptr = 4'd0;
+                    next_ptr = 5'd0;
                     next_state = WRITE_RAM;
                 end
             end
 
             WRITE_RAM: begin
                 we_ram = 1'b1;
-                next_ptr = 4'd0;
+                next_ptr = 5'd0;
                 next_state = TX_ROM_SETUP;
             end
 
@@ -124,8 +124,8 @@ module framer_fsm_tmr (
                 sel_rom = 1'b1;
                 if (txb_falling) begin // Esperamos a que termine de transmitir
                     update_checksum = 1'b1;
-                    if (ptr_reg == 4'd3) begin
-                        next_ptr = 4'd0;
+                    if (ptr_reg == 5'd3) begin
+                        next_ptr = 5'd0;
                         next_state = TX_RAM_SETUP;
                     end else begin
                         next_ptr = ptr_reg + 1'b1;
@@ -146,7 +146,7 @@ module framer_fsm_tmr (
                 sel_rom = 1'b0;
                 if (txb_falling) begin
                     update_checksum = 1'b1;
-                    if (ptr_reg == 4'd7) begin
+                    if (ptr_reg == 5'd21) begin
                         next_state = TX_CHK_SETUP;
                     end else begin
                         next_ptr = ptr_reg + 1'b1;
@@ -179,3 +179,4 @@ module framer_fsm_tmr (
     end
 
 endmodule
+
