@@ -4,10 +4,10 @@
 module memory_and_framer (
     input wire clk,
     input wire rst_n,
-    input wire [3:0] addr,
+    input wire [4:0] addr,
     input wire sel_rom,
     input wire we_ram,
-    input wire [23:0] payload_data,
+    input wire [191:0] payload_data,
     input wire clear_checksum,
     input wire update_checksum,
     output wire [7:0] data_out,
@@ -19,38 +19,27 @@ module memory_and_framer (
     assign ROM_banco[0] = 8'hAA; // SYNC1
     assign ROM_banco[1] = 8'h55; // SYNC2
     assign ROM_banco[2] = 8'h01; // DEVICE_ID
-    assign ROM_banco[3] = 8'h08; // PAYLOAD_LEN (8 bytes de RAM)
+    assign ROM_banco[3] = 8'h18; // PAYLOAD_LEN (24 bytes de RAM)
 
     // Memoria RAM estática/segmentada
-    // Se mapean los 3 bytes de carga útil y 5 bytes de padding (0x00)
-    reg [7:0] RAM_banco [0:7];
+    // Se mapean los 24 bytes de carga útil (MPU6050:14, BME280:8, BH1750:2)
+    reg [7:0] RAM_banco [0:23];
+    integer i;
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            RAM_banco[0] <= 8'h00;
-            RAM_banco[1] <= 8'h00;
-            RAM_banco[2] <= 8'h00;
-            RAM_banco[3] <= 8'h00;
-            RAM_banco[4] <= 8'h00;
-            RAM_banco[5] <= 8'h00;
-            RAM_banco[6] <= 8'h00;
-            RAM_banco[7] <= 8'h00;
+            for(i=0; i<24; i=i+1) begin
+                RAM_banco[i] <= 8'h00;
+            end
         end else if (we_ram) begin
-            // Acomodar los 3 bytes del LTR390-UV
-            RAM_banco[0] <= payload_data[23:16];
-            RAM_banco[1] <= payload_data[15:8];
-            RAM_banco[2] <= payload_data[7:0];
-            // Rellenar con 0x00 el resto
-            RAM_banco[3] <= 8'h00;
-            RAM_banco[4] <= 8'h00;
-            RAM_banco[5] <= 8'h00;
-            RAM_banco[6] <= 8'h00;
-            RAM_banco[7] <= 8'h00;
+            for(i=0; i<24; i=i+1) begin
+                RAM_banco[i] <= payload_data[(23-i)*8 +: 8];
+            end
         end
     end
 
     // Mux Combinacional para data_out
-    assign data_out = sel_rom ? ROM_banco[addr[1:0]] : RAM_banco[addr[2:0]];
+    assign data_out = sel_rom ? ROM_banco[addr[1:0]] : RAM_banco[addr];
 
     // Cálculo dinámico del Checksum (XOR de los bytes a medida que se transmiten)
     always @(posedge clk or negedge rst_n) begin
